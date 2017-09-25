@@ -1,0 +1,61 @@
+<div ng-init="root.isHomePage = false" class="views" >
+    <div class="view view-main" data-page="cards">
+        <div class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header  " ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+
+                <div ng-init="getGlobalSettings()"  class="page-content ">
+                    <div id="scrollable" class="list-block" style=" margin-top: 10px;">
+
+
+                        <form style="background-image: url(images/regBG.png); padding: 20px; background-size: cover; border-radius: 30px; margin: 20px; margin-top: 50px; border: 1px #ddd solid" class="ng-pristine ng-valid ng-scope">
+                            <div class="list-block">
+                                <h4 style="margin-top: -20px; margin-bottom: 20px;  text-align: center;">{{ _('code107') }}  </h4>
+
+
+
+                                <!-- ngIf: error -->
+
+
+                                <ul ng-init="emptyInputs()">
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="text" value=" " style="text-align: center;" autocomplete="off" id="user-email" name="useremail" placeholder=" {{ _('code30') }} " class="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" style="text-align: center;" value=" " autocomplete="off" id="user-password" name="userpassword" placeholder=" {{ _('code31') }} ">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul style="margin-top: -60px;">
+                                <li ng-click="doLogin()">
+                                    <a class="item-link list-button" style=" width: 60%; margin: 0 auto;  border-radius: 20px;   background-color: #004778;   text-align: center;    color: #fff;"> {{ _('code107') }}  </a>
+                                </li>
+                            </ul>
+                            <h4 ng-if="errorMessage == 1" style="color: #ab3131; text-align: center;" > {{ _('code108') }}   </h4>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+    </div>

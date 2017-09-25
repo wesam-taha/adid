@@ -1,0 +1,106 @@
+<div ng-init="root.isHomePage = false" class="views" >
+    <div class="view view-main" ng-init="getActivities()" data-page="cards">
+        <div  ng-init="getAccountInfo()" class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header  " ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+
+                <div  class="page-content " style="background-image: none !important; background-color: #0083b8">
+                    <div id="scrollable" class="list-block" style=" margin-top: 10px;">
+                    <br>
+                                <div class="swiper-slide" ng-repeat="n in activities"  >
+
+
+                                    <table ng-if="getActivitiesDone" style="  width: 95%;
+       border: 1px #003160 solid;
+    margin: 0 auto;
+    position: relative;
+    top: -18px;
+    border-collapse: collapse;
+    text-align: center;
+    color: #fff; box-shadow: 1px -1px 37px #47c0e4;
+    margin-bottom: 25px;
+    background-color: #003160;">
+                                        <tr><td style="background-color: #fff; height: 90px; ">
+
+                                                <div class="row" style="margin-top: -6px;">
+                                                    <div class="col-25"><img style=" height: 45px;    position: relative;  top: 12px;" src="images/i1.png">
+                                                        <br>
+                                                        <span style=" font-size: 13px;  position: relative;  top: 7px; font-weight: 700; direction: rtl; color: #47c0e4;"> {{ n.activity_hours }} {{ _('code02') }}  </span> 
+                                                    </div>
+                                                    <div class="col-25"><img style=" height: 45px;  font-size: 13px;  position: relative;  top: 12px;" src="images/i2.png"><br>
+                                                        <span style="font-size: 13px;  position: relative; font-weight: 700; top: 7px;     color: #af9569;"> {{ n.total }} {{ _('code01') }}</span> 
+                                                    </div>
+                                                    <div class="col-50"><img style="    height: 64px;
+                                                                             position: relative;
+                                                                             top: 12px;
+                                                                             right: 15px " src="http://127.0.0.1/adid/images/{{ n.activity_image}}"> </div>
+
+
+                                                </div>	
+
+                                   
+<tr><td style="background-image: url('images/s1.png'); background-position: center; background-size: cover; height: 26px; ">
+
+                                                <div class="row" >
+                                                    <div class="col-50" style="font-size: 15px;"><b> {{ _('code03') }}  {{ n.activity_start_date}} </b></div>
+                                                    <div class="col-50" style="font-size: 15px;"> <b> {{ _('code04') }}  {{ n.activity_end_date}} </b></div>
+                                                </div>
+
+
+
+                                            </td></tr>
+                                                 <tr><td style="height: 26px; text-shadow: 1px 1px #333; position: relative; top: -10px; font-size: 16px;" ><b>
+                                                    <br>
+                                                    <br ng-if="$root.selectedID == 0 || admin_approval == 2 || security_approval == 2">
+                                                    <div ng-if="$root.currentLang == 'ar' " style="width: 95%; margin: 0 auto;" >{{ n.activity_name_ar}}</b></div>
+                                                    <div ng-if="$root.currentLang == 'en' " style="width: 95%; font-weight: 700; margin: 0 auto; margin-top: 10px; margin-bottom: 10px; " >{{ n.activity_name_en}}</b></div>
+                                            </td></tr>
+
+                                              <tr ng-if="$root.selectedID > 0 && admin_approval == 1 && security_approval == 1" ><td style="height: 46px; width: 50%; color: #336699 " > 
+                                     <div class="joinNow" > <a href="#/view/{{ n.activity_id }}"  >
+                                                     {{ _('code08') }} </a></div>
+                                         </td></tr>
+
+                                        
+                                        <tr><td style="background-image: url('images/s2.png'); text-shadow: 1px 1px #333; font-size: 13px; background-size: cover; height: 26px; " >
+
+                                        <b ng-if="$root.currentLang == 'ar' ">{{ n.activity_time_ar}}</b>
+                                        <b ng-if="$root.currentLang == 'en' ">{{ n.activity_time_en}}</b>
+
+                                        </td></tr>
+
+                                   
+
+                                    
+
+                                    </table>
+
+                           
+
+
+
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+        <div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+
+    </div>

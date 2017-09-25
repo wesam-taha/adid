@@ -1,0 +1,44 @@
+<!-- list of uploaded files -->
+
+
+<div  ng-if="Info.visa_copy !='' && !Info.visaCopy">
+    <div  class="uploadedContainer">
+<a  href="{{config.settings.filepath}}{{file.filename}}" target="_blank">
+            <img style="margin-bottom: 20px; width: 50%;  " src="{{config.settings.filepath}}{{Info.visa_copy}}">
+        </a>
+    </div>
+</div>
+
+
+<div  ng-repeat="file in Info.visaCopy track by $index">
+    <div  class="uploadedContainer">
+        <a  href="{{config.settings.filepath}}{{file.filename}}" target="_blank">
+            <img style="margin-bottom: 20px;" width="100" src="{{config.settings.filepath}}{{file.filename}}">
+        </a>
+        <a ng-click="remove(file.filename, $index, 'visaCopy')" title="remove file" href>
+            <img src="images/bigminus.png" width="24" height="24" >
+        </a>
+    </div>
+</div>
+<visacopyfileuploader 
+    handlerpath="{{config.settings.handlerpath}}"
+    pickfilecaption="{{config.settings.pickfilecaption}}"
+    max_file_size="{{config.settings.max_file_size}}"
+    chunksize="{{config.settings.chunksize}}"
+    headers="{{config.settings.headers}}"
+    extensions="{{config.settings.extensions}}"
+    extensiontitle="{{config.settings.extensiontitle}}"
+    filename="{{config.value}}"
+    filepath="{{config.settings.filepath}}"
+    removehandler="{{config.settings.removehandler}}"
+    maxallowedfiles="{{config.maxfiles}}"
+    uploadfilecaption={{config.settings.uploadfilecaption}}
+    submit-data="getVisaCopyUploadedData(data)"
+    >
+</visacopyfileuploader>
+
+
+
+
+
+

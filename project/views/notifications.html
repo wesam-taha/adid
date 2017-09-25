@@ -1,0 +1,93 @@
+<div ng-init="root.isHomePage = false" class="views" >
+    <div class="view view-main" ng-init="getNotifications()" data-page="cards">
+        <div  ng-init="getAccountInfo()" class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header  " ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+<div ng-if="!loadingNotificationsDone" class="spinner">
+  <div class="double-bounce1"></div>
+  <div class="double-bounce2"></div>
+</div>
+
+                <div ng-if="loadingNotificationsDone" class="page-content ">
+                    <div class="list-block accordion-list">
+                        <ul>
+
+                           <li ng-repeat='n in notifications' class="accordion-item"><a class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div ng-if="$root.currentLang == 'ar' " class="item-title" style="text-align: center; font-weight: 700; font-size: 12px; position: relative; top: 8px; ">
+                                        {{ n.title_ar }}</div>
+
+                                        <div ng-if="$root.currentLang == 'en' " class="item-title" style="text-align: center; font-weight: 700; font-size: 12px; position: relative; top: 8px; ">
+                                        {{ n.title_en }}</div>
+                                    </div></a>
+                                <div class="accordion-item-content">
+                                    <div class="list-block">
+                                        <ul>
+
+                                            <li ng-if="$root.currentLang == 'ar' " style="direction: rtl; line-height: 25px; font-size: 14px;">
+                                            
+                                                 {{ n.date }}  <bR>
+                                                {{ n.message_ar }}
+                                                
+
+                                            </li>
+
+
+                                            <li ng-if="$root.currentLang == 'en' " style="direction: rtl; line-height: 25px; font-size: 14px;">
+                                            
+                                                 {{ n.date }}  <bR>
+                                                {{ n.message_en }}
+                                                
+
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+        <div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+
+    </div>
+
+    <style type="text/css">
+
+        .list-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            position: relative;
+            width: 90%;
+            background-color: #f2f2f2;
+            text-align: center; 
+        }
+        .list-block .accordion-item .content-block, .list-block .accordion-item .list-block, .list-block li {
+        
+        }
+        .list-block .item-content, .list-block .item-inner { display: block; }
+        .list-block .item-link .item-inner, .list-block .list-button .item-inner { 
+            background-image: url('images/arrow.png') !important; background-size: 10%; 
+        }
+
+
+.list-block:not(.media-list) .accordion-item-expanded:not(.media-item) .accordion-item-toggle .item-inner, .list-block:not(.media-list) .accordion-item-expanded:not(.media-item) > .item-link .item-inner, .list-block.media-list .accordion-item-expanded .accordion-item-toggle .item-title-row, .list-block.media-list .accordion-item-expanded > .item-link .item-title-row, .list-block .accordion-item-expanded.media-item .accordion-item-toggle .item-title-row, .list-block .accordion-item-expanded.media-item > .item-link .item-title-row { 
+ background-image: url('images/arrow2.png') !important; background-size: 10%;
+ }        
+    </style>

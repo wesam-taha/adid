@@ -1,0 +1,54 @@
+<div class="views" ng-init="root.isHomePage = false">
+    <div class="view view-main" data-page="cards">
+        <div class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header" ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+
+                <div  class="page-content " style="background-image: url('images/loginBG.png') !important; overflow:hidden;">
+                    <div id="scrollable" class="list-block" style="  margin-top: 10px;">
+
+                        <div  class="headerImg  card-header color-white no-border " style="padding: 0px !important">
+
+
+                            <div ng-if="$root.currentLang == 'ar' " map id="map" style="width: 98%; margin: 0 auto; height: 450px;"></div>
+                            <div ng-if="$root.currentLang == 'en' " mapen id="map" style="width: 98%; margin: 0 auto; height: 450px;"></div>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+    </div>
+
+    <style type="text/css">
+
+        #map div {  color: #000 !important; text-align: center;	    font-family: 'Droid Arabic Kufi';
+        }
+        .button.button-big {
+            height: 32px;
+            line-height: 33px;
+            border-radius: 3px;
+            background-color: #47c0e4;
+            color: #fff;
+            font-family: 'Droid Arabic Kufi';
+            padding: 0px;
+            width: 116px;
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+
+
+    </style>

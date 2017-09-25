@@ -1,0 +1,53 @@
+<div class="views" ng-init="root.isHomePage = false">
+    <div class="view view-main" data-page="cards">
+        <div class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header" ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+
+                <div  class="page-content " style="background-image: url('images/loginBG.png') !important; overflow:hidden;">
+                    <div id="scrollable" class="list-block" style="  margin-top: 10px;">
+
+                        <div ng-init="getGlobalSettings()" class="headerImg  card-header color-white no-border " style="padding: 0px !important">
+
+
+
+                            <table style="width: 100%; background-color: #fff; width: 80%; margin: 0 auto; border-radius: 20px; margin-top: 30px; height: 200px; ">
+                                <tr><td style="text-align: center;">
+                                        <br><br>
+                                        <img style="margin: 0 auto; margin-top: 0px; width: 30%;" src="images/tick_green.png">
+
+                                    </td></tr>
+                                <tr><td style="text-align: center; color: #000 ">
+
+                                        {{ _('code112') }}
+                                        <br><br><br>
+
+                                        <a ng-if="$root.currentLang == 'ar' " href="#/home" class="btn btn-lg submitbtn" style="border-radius: 5px; padding-right: 20px; padding-left: 20px; "  id="submit" > الرئيسية </a>
+                                        <a ng-if="$root.currentLang == 'en' " href="#/home" class="btn btn-lg submitbtn" style="border-radius: 5px; padding-right: 20px; padding-left: 20px; "  id="submit" > Home </a>
+
+                                        <br><br>
+                                        <br>
+
+
+
+                                    </td></tr>
+
+                            </table>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+    </div>

@@ -1,0 +1,513 @@
+<div  ng-include="'views/templates/appHeader.html'"></div>
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+<div class="alert {{messagecss}} alert-dismissible" role="alert" ng-if="message != ''">
+    <button type="button" class="close" data-dismiss="alert" ng-click="clear()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p ng-if="validationLog.length > 0" ng-repeat="val in validationLog track by $index">
+        {{val.message}}
+    </p>
+</div>
+<div ng-if="showProcessing">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+
+<!--<h4 class="heading-primary text-uppercase mb-md">{{Form.header}} {{ nextVal }}</h4>
+<p ng-if="Form.info != ''"> {{Form.info}} </p> -->
+
+<div ng-init="getGlobalSettings()" class="page-content" style="    margin-top: -20px;" ng-if="!showProcessing" >
+    <div class="list-block" style="background-image: url(images/regBG.png); padding: 20px; background-size: cover; border-radius: 30px; margin: 20px; margin-top: 20px; text-align: center;     padding-bottom: 50px;
+         margin-bottom: 60px; border: 0px #ddd solid" class="ng-pristine ng-valid ng-scope">
+
+        <ul >
+            <li class="item-content" ng-if="nextVal == 1" class="form-group {{formConfig[0].css}}" >
+                <div class="item-input" style="text-align:center"> 
+                    <h5  style="font-weight: 700; margin-bottom: 15px; "> {{ _('code23') }} </h5>
+
+
+    
+
+                    <input ng-if="full_name_ar.id == 'full_name_ar'" ng-if="nextVal == 1" type="text" ng-blur="validate(full_name_ar)" class="form-control" ng-model="full_name_ar.value" placeholder=" {{ _('code25') }} ">
+
+                    <input ng-if="full_name_en.id == 'full_name_en'" ng-if="nextVal == 1" type="text" ng-blur="validate(full_name_en)" class="form-control" ng-model="full_name_en.value" placeholder="{{ _('code26') }}">
+
+
+
+                    <input ng-if="date_of_birth.id == 'date_of_birth'"  ng-if="nextVal == 1" mdb 
+                           onclick="document.activeElement.blur();"  type="text" ng-blur="validate(date_of_birth)" class="dob form-control" ng-model="date_of_birth.value" placeholder="{{ _('code28') }}">
+
+
+  <select  ng-if="institution_type.id == 'institution_type'" style="text-align:center" ng-model="institution_type.value" ng-init="institution_type.value = institution_type.value"  > 
+                        <option value=""  ng-selected="institution_type.value == ''" > {{ _('code82') }} </option>
+                        <option  value="1" ng-selected="institution_type.value == '1'"  >{{ _('code83') }}   </option>
+                        <option  value="2" ng-selected="institution_type.value == '2'"  >{{ _('code84') }}  </option>
+                    </select>
+
+
+
+                <select  ng-if="volunteering_type.id == 'volunteering_type'" style="text-align:center" ng-model="volunteering_type.value" ng-init="volunteering_type.value = volunteering_type.value"  > 
+                    <option value=""  ng-selected="volunteering_type.value == ''" >{{ _('code58') }}  </option>
+                    <option value="1" ng-selected="volunteering_type.value == '1'">{{ _('code59') }}</option>
+                    <option value="2" ng-selected="volunteering_type.value == '2'">{{ _('code60') }} </option>
+                </select>
+
+                    <input ng-if="email.id == 'email'" ng-if="nextVal == 1" type="text" ng-blur="validate(email)" class="form-control" ng-model="email.value" placeholder="{{ _('code30') }}">
+
+                    <input ng-if="password.id == 'password'" ng-if="nextVal == 1" type="password" ng-blur="validate(password)" class="form-control" ng-model="password.value" placeholder="{{ _('code31') }}">
+
+
+                </div>
+            </li>
+            <li class="item-content" ng-if="nextVal == 2"  >
+                <h5  style="font-weight: 700"> {{ _('code81') }} </h5><br>
+
+           
+
+                    <input ng-if="institutes_name.id == 'institutes_name'" ng-if="nextVal == 1" type="text" ng-blur="validate(institutes_name)" class="form-control" ng-model="institutes_name.value" placeholder=" {{ _('code85') }} ">
+
+   <input ng-if="licence_no.id == 'licence_no'" ng-if="nextVal == 1" type="text" ng-blur="validate(licence_no)" class="form-control" ng-model="licence_no.value" placeholder="{{ _('code86') }} ">                    
+
+ <input onclick="document.activeElement.blur();" ng-if="tl_expiry_date.id == 'tl_expiry_date'" tlexdate type="text" ng-blur="validate(tl_expiry_date)" class="form-control" ng-model="tl_expiry_date.value" placeholder="تاريخ انتهاء الرخصة">
+
+
+        </li>
+
+          <li class="item-content" ng-if="nextVal == 2"  >
+                <div ng-if="config.id == 'trade_licence'" class="item-content" ng-repeat="config in formConfig" ng-include="config.template"></div>
+                <p ng-if="config.errorMsg" class="help-block">{{configerrorMsg}}</p>
+                <p ng-if="!config.errorMsg && config.tooltip != ''">{{config.tooltip}}</p>
+            </li>
+
+
+         <li class="item-content" ng-if="nextVal == 3"  >
+
+             <h5  style="font-weight: 700">معلومات الجنسية والإقامة </h5><br>
+                
+
+               <select  ng-if="nationality_type.id == 'nationality_type'" style="text-align:center" ng-model="nationality_type.value" ng-init="nationality_type.value = nationality_type.value"  > 
+                    <option value=""  ng-selected="nationality_type.value == ''" > اختر نوع الجنسية   </option>
+                    <option  value="1" ng-selected="nationality_type.value == '1'"  > مواطني دولة الإمارات العربية المتحدة  </option>
+                    <option  value="2" ng-selected="nationality_type.value == '2'"  > مواطني مجلس التعاون الخليجي   </option>
+                    <option  value="3" ng-selected="nationality_type.value == '3'"  > مقيم داخل الدولة   </option>
+
+                </select>
+
+
+<select ng-if="nationality_type.value == '1' && nationality.id == 'nationality' " ng-model="nationality.value" ng-init="nationality.value = 'الإمارات العربية المتحدة' " size="1" name="place">
+    <OPTION ng-selected="nationality_type.value == '1' "  value="الإمارات العربية المتحدة">الإمارات العربية المتحدة</OPTION>
+</select>
+
+<select ng-if="nationality_type.value == '2' && nationality.id == 'nationality'" ng-model="nationality.value" ng-init="nationality.value = 'nationality.value'" size="1" name="place">
+    <OPTION ng-selected="nationality.value == nationality.value " value="">{{ _('code29') }}
+    </OPTION>
+    <OPTION ng-selected="nationality.value == 'المملكة العربية السعودية'"  value="المملكة العربية السعودية">المملكة العربية السعودية</OPTION>
+    <OPTION ng-selected="nationality.value == 'الكويت'" value="الكويت">الكويت</OPTION>
+    <OPTION ng-selected="nationality.value == 'البحرين'"  value="البحرين">البحرين</OPTION>
+    <OPTION ng-selected="nationality.value == 'عمان'"  value="عمان">عمان</OPTION>
+    <OPTION ng-selected="nationality.value == 'قطر'"  value="قطر">قطر</OPTION>
+</select>
+
+<select ng-if="nationality_type.value == '3' && nationality.id == 'nationality'" ng-model="nationality.value" ng-init="nationality.value =  nationality.value " size="1" name="place">
+    <OPTION ng-selected="nationality.value == '' " value="">{{ _('code29') }}
+    </OPTION>
+    
+    <OPTION ng-selected="nationality.value == 'مصر'" value="مصر">جمهورية مصر العربية</OPTION>
+    <OPTION ng-selected="nationality.value == 'الأردن'"  value="الأردن">الأردن</OPTION>
+    <OPTION ng-selected="nationality.value == 'اليمن'"  value="اليمن">اليمن</OPTION>
+    <OPTION ng-selected="nationality.value == 'فلسطين'"  value="فلسطين" المحتلة>فلسطين المحتلة</OPTION>
+    <OPTION ng-selected="nationality.value == 'سوريا'"  value="سوريا">سوريا</OPTION>
+    <OPTION ng-selected="nationality.value == 'لبنان'"  value="لبنان">لبنان</OPTION>
+    <OPTION ng-selected="nationality.value == 'العراق'"  value="العراق">العراق</OPTION>
+    <OPTION ng-selected="nationality.value == 'السودان'"  value="السودان">السودان</OPTION>
+    <OPTION ng-selected="nationality.value == 'ليبيا'"  value="ليبيا">ليبيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'الجزائر'"  value="الجزائر">الجزائر</OPTION>
+    <OPTION ng-selected="nationality.value == 'موريتانيا'"  value="موريتانيا">موريتانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'المغرب'"  value="المغرب">المغرب</OPTION>
+    <OPTION ng-selected="nationality.value == 'تونس'"  value="تونس">تونس</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر القمر'"  value="جزر القمر">جزر القمر</OPTION>
+    <OPTION ng-selected="nationality.value == 'تركيا'"  value="تركيا">تركيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ماليزيا'"  value="ماليزيا">ماليزيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أفغانستان'"  value="أفغانستان">أفغانستان</OPTION>
+    <OPTION ng-selected="nationality.value == 'باكستان'"  value="باكستان">باكستان</OPTION>
+    <OPTION ng-selected="nationality.value == 'المملكة المتحدة'"  value="المملكة المتحدة">المملكة المتحدة</OPTION>
+    <OPTION ng-selected="nationality.value == 'الولايات المتحدة الامريكية'"  value="الولايات المتحدة الامريكية">الولايات المتحدة الامريكية</OPTION>
+    <OPTION ng-selected="nationality.value == 'كندا'"  value="كندا">كندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'فرنسا'"  value="فرنسا">فرنسا</OPTION>
+    <OPTION ng-selected="nationality.value == 'النمسا'"  value="النمسا">النمسا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ألمانيا'"  value="ألمانيا">ألمانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ألبانيا'"  value="ألبانيا">ألبانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ساموا  الأمريكية'"  value="ساموا  الأمريكية">ساموا الأمريكية</OPTION>
+    <OPTION ng-selected="nationality.value == 'أندورا'"  value="أندورا">أندورا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أنغولا'"  value="أنغولا">أنغولا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أنجويلا'"  value="أنجويلا">أنجويلا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أنتاركتيكا'"  value="أنتاركتيكا">أنتاركتيكا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أنتيغوا وبربودا'"  value="أنتيغوا وبربودا">أنتيغوا وبربودا</OPTION>
+    <OPTION ng-selected="nationality.value == 'الأرجنتين'"  value="الأرجنتين">الأرجنتين</OPTION>
+    <OPTION ng-selected="nationality.value == 'أرمينيا'"  value="أرمينيا">أرمينيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أروبا'"  value="أروبا">أروبا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أستراليا'"    value="أستراليا">أستراليا</OPTION>
+    <OPTION ng-selected="nationality.value == 'النمسا'"  value="النمسا">النمسا</OPTION>
+    <OPTION ng-selected="nationality.value == 'النمسا'"  value="أذربيجان">أذربيجان</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر  البهاما'"  value="جزر  البهاما">جزر البهاما</OPTION>
+    <OPTION ng-selected="nationality.value == 'بنغلاديش'"  value="بنغلاديش">بنغلاديش</OPTION>
+    <OPTION ng-selected="nationality.value == 'بربادوس'"  value="بربادوس">بربادوس</OPTION>
+    <OPTION ng-selected="nationality.value == 'روسيا  البيضاء'"  value="روسيا  البيضاء (بيلاروسيا)">روسيا البيضاء (بيلاروسيا)</OPTION>
+    <OPTION ng-selected="nationality.value == 'بلجيكا'"  value="بلجيكا">بلجيكا</OPTION>
+    <OPTION ng-selected="nationality.value == 'بليز'"  value="بليز">بليز</OPTION>
+    <OPTION ng-selected="nationality.value == 'بينين'"  value="بينين">بينين</OPTION>
+    <OPTION ng-selected="nationality.value == 'برمودا'"  value="برمودا">برمودا</OPTION>
+    <OPTION ng-selected="nationality.value == 'بوتان'"  value="بوتان">بوتان</OPTION>
+    <OPTION ng-selected="nationality.value == 'بوليفيا'"  value="بوليفيا">بوليفيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'البوسنة والهرسك'"  value="البوسنة والهرسك">البوسنة والهرسك</OPTION>
+    <OPTION ng-selected="nationality.value == 'بتسوانا'"  value="بتسوانا">بتسوانا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزيرة بوفيه'"  value="جزيرة بوفيه">جزيرة بوفيه</OPTION>
+    <OPTION ng-selected="nationality.value == 'البرازيل'"  value="البرازيل">البرازيل</OPTION>
+    <OPTION ng-selected="nationality.value == 'إقليم المحيط الهندي البريطاني'"  value="إقليم المحيط الهندي البريطاني">إقليم المحيط الهندي البريطاني</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر فيرجين البريطانية'"  value="جزر فيرجين البريطانية">جزر فيرجين البريطانية</OPTION>
+    <OPTION ng-selected="nationality.value == 'بروناي'"  value="بروناي">بروناي</OPTION>
+    <OPTION ng-selected="nationality.value == 'بلغاريا'"  value="بلغاريا">بلغاريا</OPTION>
+    <OPTION ng-selected="nationality.value == 'بوركينا فاسو'"  value="بوركينا فاسو">بوركينا فاسو</OPTION>
+    <OPTION ng-selected="nationality.value == 'بوروندي'"  value="بوروندي">بوروندي</OPTION>
+    <OPTION ng-selected="nationality.value == 'كامبوديا'"  value="كامبوديا">كامبوديا</OPTION>
+    <OPTION ng-selected="nationality.value == 'الكاميرون'"  value="الكاميرون">الكاميرون</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزيرة الرأس الأخضر'"  value="جزيرة الرأس الأخضر">جزيرة الرأس الأخضر</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر كايمان>جزر كايمان'"  value="جزر كايمان">جزر كايمان</OPTION>
+    <OPTION ng-selected="nationality.value == 'جمهورية أفريقيا الوسطى'"  value="جمهورية أفريقيا الوسطى">جمهورية أفريقيا الوسطى</OPTION>
+    <OPTION ng-selected="nationality.value == 'تشاد'"  value="تشاد">تشاد</OPTION>
+    <OPTION ng-selected="nationality.value == 'تشيلي'"  value="تشيلي">تشيلي</OPTION>
+    <OPTION ng-selected="nationality.value == 'الصين'"  value="الصين">الصين</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزيرة الكريسماس'"  value="جزيرة الكريسماس">جزيرة الكريسماس</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر كوكوس'"  value="جزر كوكوس (كيلنج)">جزر كوكوس (كيلنج)</OPTION>
+    <OPTION ng-selected="nationality.value == 'كولومبيا'"  value="كولومبيا">كولومبيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'الكونغو'"  value="الكونغو">الكونغو</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر كوك'"  value="جزر كوك">جزر كوك</OPTION>
+    <OPTION ng-selected="nationality.value == 'كوستاريكا'"  value="كوستاريكا">كوستاريكا</OPTION>
+    <OPTION ng-selected="nationality.value == 'كرواتيا'"  value="كرواتيا">كرواتيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'كوبا'"  value="كوبا">كوبا</OPTION>
+    <OPTION ng-selected="nationality.value == 'قبرص'"  value="قبرص">قبرص</OPTION>
+    <OPTION ng-selected="nationality.value == 'جمهورية التشيك'"  value="جمهورية التشيك">جمهورية التشيك</OPTION>
+    <OPTION ng-selected="nationality.value == 'جمهورية الكونغو الديمقراطية'"  value="جمهورية الكونغو الديمقراطية">جمهورية الكونغو الديمقراطية</OPTION>
+    <OPTION ng-selected="nationality.value == 'الدنمارك'"  value="الدنمارك">الدنمارك</OPTION>
+    <OPTION ng-selected="nationality.value == 'منطقة متنازع عليها'"  value="منطقة متنازع عليها">منطقة متنازع عليها</OPTION>
+    <OPTION ng-selected="nationality.value == 'جيبوتي'"  value="جيبوتي">جيبوتي</OPTION>
+    <OPTION ng-selected="nationality.value == 'دومينيكا'"  value="دومينيكا">دومينيكا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جمهورية الدومنيكان'"  value="جمهورية الدومنيكان">جمهورية الدومنيكان</OPTION>
+    <OPTION ng-selected="nationality.value == 'تيمور الشرقية'"  value="تيمور الشرقية">تيمور الشرقية</OPTION>
+    <OPTION ng-selected="nationality.value == 'الإكوادور'"  value="الإكوادور">الإكوادور</OPTION>
+    <OPTION ng-selected="nationality.value == 'السلفادور'"  value="السلفادور">السلفادور</OPTION>
+    <OPTION ng-selected="nationality.value == 'غينيا الاستوائية'"  value="غينيا الاستوائية">غينيا الاستوائية</OPTION>
+    <OPTION ng-selected="nationality.value == 'أرتيريا'"  value="أرتيريا">أرتيريا</OPTION>
+    <OPTION ng-selected="nationality.value == 'إستونيا'"  value="إستونيا">إستونيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أثيوبيا'"  value="أثيوبيا">أثيوبيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر فوكلاند'"  value="جزر فوكلاند">جزر فوكلاند</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر فارو'"  value="جزر فارو">جزر فارو</OPTION>
+    <OPTION ng-selected="nationality.value == 'ولايات  ميكرونيسيا المتحدة'"  value="ولايات  ميكرونيسيا المتحدة">ولايات ميكرونيسيا المتحدة</OPTION>
+    <OPTION ng-selected="nationality.value == 'فيجي'"  value="فيجي">فيجي</OPTION>
+    <OPTION ng-selected="nationality.value == 'فنلندا'"  value="فنلندا">فنلندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'غويانا  الفرنسية'"  value="غويانا  الفرنسية">غويانا الفرنسية</OPTION>
+    <OPTION ng-selected="nationality.value == 'بولينيزيا الفرنسية'"  value="بولينيزيا الفرنسية">بولينيزيا الفرنسية</OPTION>
+    <OPTION ng-selected="nationality.value == 'الغابون'"  value="الغابون">الغابون</OPTION>
+    <OPTION ng-selected="nationality.value == 'غامبيا'"  value="غامبيا">غامبيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جورجيا'"  value="جورجيا">جورجيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'غانا'"  value="غانا">غانا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جبل طارق'"  value="جبل طارق">جبل طارق </OPTION>
+    <OPTION ng-selected="nationality.value == 'اليونان'"  value="اليونان">اليونان</OPTION>
+    <OPTION ng-selected="nationality.value == 'جرينلاند'"  value="جرينلاند">جرينلاند</OPTION>
+    <OPTION ng-selected="nationality.value == 'غرينادا'"  value="غرينادا">غرينادا</OPTION>
+    <OPTION ng-selected="nationality.value == 'غوادلوب'"  value="غوادلوب">غوادلوب</OPTION>
+    <OPTION ng-selected="nationality.value == 'غوام'"  value="غوام">غوام</OPTION>
+    <OPTION ng-selected="nationality.value == 'غواتيمالا'"  value="غواتيمالا">غواتيمالا</OPTION>
+    <OPTION ng-selected="nationality.value == 'غينيا'"  value="غينيا">غينيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'غينيا-بيساو'"  value="غينيا-بيساو">غينيا-بيساو</OPTION>
+    <OPTION ng-selected="nationality.value == 'غويانا'"  value="غويانا">غويانا</OPTION>
+    <OPTION ng-selected="nationality.value == 'هايتي'"  value="هايتي">هايتي</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزيرة هيرد وجزر ماكدونالد'"  value="جزيرة هيرد وجزر ماكدونالد">جزيرة هيرد وجزر ماكدونالد</OPTION>
+    <OPTION ng-selected="nationality.value == 'هندوراس'"  value="هندوراس">هندوراس</OPTION>
+    <OPTION ng-selected="nationality.value == 'هونغ كونغ'"  value="هونغ كونغ">هونغ كونغ</OPTION>
+    <OPTION ng-selected="nationality.value == 'المجر'"  value="المجر">المجر (هنغاريا)</OPTION>
+    <OPTION ng-selected="nationality.value == 'أيسلندا'"  value="أيسلندا">أيسلندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'الهند'"  value="الهند">الهند</OPTION>
+    <OPTION ng-selected="nationality.value == 'إندونيسيا'"  value="إندونيسيا">إندونيسيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'إيران'"  value="إيران">إيران</OPTION>
+    <OPTION ng-selected="nationality.value == 'أيرلندا'"  value="أيرلندا">أيرلندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'إيطاليا'"  value="إيطاليا">إيطاليا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ساحل'"  value="ساحل" العاج>ساحل العاج</OPTION>
+    <OPTION ng-selected="nationality.value == 'جامايكا'"  value="جامايكا">جامايكا</OPTION>
+    <OPTION ng-selected="nationality.value == 'اليابان'"  value="اليابان">اليابان</OPTION>
+    <OPTION ng-selected="nationality.value == 'الأردن'"  value="الأردن">الأردن</OPTION>
+    <OPTION ng-selected="nationality.value == 'كازاخستان'"  value="كازاخستان">كازاخستان</OPTION>
+    <OPTION ng-selected="nationality.value == 'كينيا'"  value="كينيا">كينيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر  الكيريباتي'"  value="جزر  الكيريباتي">جزر الكيريباتي</OPTION>
+    <OPTION ng-selected="nationality.value == 'قيرغيزستان'"  value="قيرغيزستان">قيرغيزستان</OPTION>
+    <OPTION ng-selected="nationality.value == 'لاوس'"  value="لاوس">لاوس</OPTION>
+    <OPTION ng-selected="nationality.value == 'لاتفيا'"  value="لاتفيا">لاتفيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ليسوتو'"  value="ليسوتو">ليسوتو</OPTION>
+    <OPTION ng-selected="nationality.value == 'ليبريا'"  value="ليبريا">ليبريا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ليختنشتاين'"  value="ليختنشتاين">ليختنشتاين</OPTION>
+    <OPTION ng-selected="nationality.value == 'ليتوانيا'"  value="ليتوانيا">ليتوانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'لوكسمبورغ'"  value="لوكسمبورغ">لوكسمبورغ</OPTION>
+    <OPTION ng-selected="nationality.value == 'ماكاو'"  value="ماكاو">ماكاو</OPTION>
+    <OPTION ng-selected="nationality.value == 'مقدونيا'"  value="مقدونيا">مقدونيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'مدغشقر'"  value="مدغشقر">مدغشقر</OPTION>
+    <OPTION ng-selected="nationality.value == 'ملاوي'"  value="ملاوي">ملاوي</OPTION>
+    <OPTION ng-selected="nationality.value == 'المالديف'"  value="المالديف">المالديف</OPTION>
+    <OPTION ng-selected="nationality.value == 'مالي'"  value="مالي">مالي</OPTION>
+    <OPTION ng-selected="nationality.value == 'مالطا'"  value="مالطا">مالطا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر مارشال'"  value="جزر مارشال">جزر مارشال</OPTION>
+    <OPTION ng-selected="nationality.value == 'مارتينيك'"  value="مارتينيك">مارتينيك</OPTION>
+    <OPTION ng-selected="nationality.value == 'موريشيوس'"  value="موريشيوس">موريشيوس</OPTION>
+    <OPTION ng-selected="nationality.value == 'مايوت'"  value="مايوت">مايوت</OPTION>
+    <OPTION ng-selected="nationality.value == 'المكسيك'"  value="المكسيك">المكسيك</OPTION>
+    <OPTION ng-selected="nationality.value == 'مولدوفا'"  value="مولدوفا">مولدوفا</OPTION>
+    <OPTION ng-selected="nationality.value == 'موناكو'"  value="موناكو">موناكو</OPTION>
+    <OPTION ng-selected="nationality.value == 'منغوليا'"  value="منغوليا">منغوليا</OPTION>
+    <OPTION ng-selected="nationality.value == 'مونتسرات'"  value="مونتسرات">مونتسرات</OPTION>
+    <OPTION ng-selected="nationality.value == 'موزمبيق'"  value="موزمبيق">موزمبيق</OPTION>
+    <OPTION ng-selected="nationality.value == 'ميانمار'"  value="ميانمار">ميانمار</OPTION>
+    <OPTION ng-selected="nationality.value == 'ناميبيا'"  value="ناميبيا">ناميبيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ناورو'"  value="ناورو">ناورو</OPTION>
+    <OPTION ng-selected="nationality.value == 'نيبال'"  value="نيبال">نيبال</OPTION>
+    <OPTION ng-selected="nationality.value == 'هولندا'"  value="هولندا">هولندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'كاليدونيا الجديدة'"  value="كاليدونيا الجديدة">كاليدونيا الجديدة</OPTION>
+    <OPTION ng-selected="nationality.value == 'نيوزيلندا'"  value="نيوزيلندا">نيوزيلندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'نيكاراغوا'"  value="نيكاراغوا">نيكاراغوا</OPTION>
+    <OPTION ng-selected="nationality.value == 'النيجر'"  value="النيجر">النيجر</OPTION>
+    <OPTION ng-selected="nationality.value == 'نيجيريا'"  value="نيجيريا">نيجيريا</OPTION>
+    <OPTION ng-selected="nationality.value == 'نيوي'"  value="نيوي">نيوي</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزيرة نورفولك'"  value="جزيرة نورفولك">جزيرة نورفولك</OPTION>
+    <OPTION ng-selected="nationality.value == 'كوريا الشمالية'"  value="كوريا الشمالية">كوريا الشمالية</OPTION>
+    <OPTION ng-selected="nationality.value == 'النرويج'"  value="النرويج">النرويج</OPTION>
+    <OPTION ng-selected="nationality.value == 'بالاو'"  value="بالاو">بالاو</OPTION>
+    <OPTION ng-selected="nationality.value == 'بنما'"  value="بنما">بنما</OPTION>
+    <OPTION ng-selected="nationality.value == 'بابوا غينيا الجديدة'"  value="بابوا غينيا الجديدة">بابوا غينيا الجديدة</OPTION>
+    <OPTION ng-selected="nationality.value == 'باراغواي'"  value="باراغواي">باراغواي</OPTION>
+    <OPTION ng-selected="nationality.value == 'بيرو'"  value="بيرو">بيرو</OPTION>
+    <OPTION ng-selected="nationality.value == 'الفلبين'"  value="الفلبين">الفلبين</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر بيتكيرن'"  value="جزر بيتكيرن">جزر بيتكيرن</OPTION>
+    <OPTION ng-selected="nationality.value == 'بولندا'"  value="بولندا">بولندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'البرتغال'"  value="البرتغال">البرتغال</OPTION>
+    <OPTION ng-selected="nationality.value == 'بورتوريكو'"  value="بورتوريكو">بورتوريكو</OPTION>
+    <OPTION ng-selected="nationality.value == 'ريونيون'"  value="ريونيون">ريونيون</OPTION>
+    <OPTION ng-selected="nationality.value == 'رومانيا'"  value="رومانيا">رومانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'روسيا'"  value="روسيا">روسيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'رواندا'"  value="رواندا">رواندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'سانت'"  value="سانت" كيتس ونيفس>سانت كيتس ونيفس</OPTION>
+    <OPTION ng-selected="nationality.value == 'سانت لوسيا'"  value="سانت لوسيا">سانت لوسيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'سانت بيير وميكويلون'"  value="سانت بيير وميكويلون">سانت بيير وميكويلون</OPTION>
+    <OPTION ng-selected="nationality.value == 'سانت فينسنت وجزر غرينادين'"  value="سانت فينسنت وجزر غرينادين">سانت فينسنت وجزر غرينادين</OPTION>
+    <OPTION ng-selected="nationality.value == 'ساموا'"  value="ساموا">ساموا</OPTION>
+    <OPTION ng-selected="nationality.value == 'سان'"  value="سان" مارينو>سان مارينو</OPTION>
+    <OPTION ng-selected="nationality.value == 'ساو تومي وبرنسيب'"  value="ساو تومي وبرنسيب">ساو تومي وبرنسيب</OPTION>
+    <OPTION ng-selected="nationality.value == 'السنغال'"  value="السنغال">السنغال</OPTION>
+    <OPTION ng-selected="nationality.value == 'سيشيل'"  value="سيشيل">سيشيل</OPTION>
+    <OPTION ng-selected="nationality.value == 'سيراليون'"  value="سيراليون">سيراليون</OPTION>
+    <OPTION ng-selected="nationality.value == 'سنغافورة'"  value="سنغافورة">سنغافورة</OPTION>
+    <OPTION ng-selected="nationality.value == 'سلوفاكيا'"  value="سلوفاكيا">سلوفاكيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'سلوفينيا'"  value="سلوفينيا">سلوفينيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر سليمان'"  value="جزر سليمان">جزر سليمان</OPTION>
+    <OPTION ng-selected="nationality.value == 'الصومال'"  value="الصومال">الصومال</OPTION>
+    <OPTION ng-selected="nationality.value == 'جنوب أفريقيا'"  value="جنوب أفريقيا">جنوب أفريقيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'كوريا'"  value="كوريا" الجنوبية>كوريا الجنوبية</OPTION>
+    <OPTION ng-selected="nationality.value == 'إسبانيا'"  value="إسبانيا">إسبانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر سبراتلي'"  value="جزر سبراتلي">جزر سبراتلي</OPTION>
+    <OPTION ng-selected="nationality.value == 'سريلانكا'"  value="سريلانكا">سريلانكا</OPTION>
+    <OPTION ng-selected="nationality.value == 'سورينام'"  value="سورينام">سورينام</OPTION>
+    <OPTION ng-selected="nationality.value == 'سفالبارد وجان ماين'"  value="سفالبارد وجان ماين">سفالبارد وجان ماين</OPTION>
+    <OPTION ng-selected="nationality.value == 'سوازيلند'"  value="سوازيلند">سوازيلند</OPTION>
+    <OPTION ng-selected="nationality.value == 'السويد'"  value="السويد">السويد</OPTION>
+    <OPTION ng-selected="nationality.value == 'سويسرا'"  value="سويسرا">سويسرا</OPTION>
+    <OPTION ng-selected="nationality.value == 'تايوان'"  value="تايوان">تايوان</OPTION>
+    <OPTION ng-selected="nationality.value == 'طاجكستان'"  value="طاجكستان">طاجكستان</OPTION>
+    <OPTION ng-selected="nationality.value == 'تنزانيا'"  value="تنزانيا">تنزانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'تايلاند'"  value="تايلاند">تايلاند</OPTION>
+    <OPTION ng-selected="nationality.value == 'توغو'"  value="توغو">توغو</OPTION>
+    <OPTION ng-selected="nationality.value == 'توكيلو'"  value="توكيلو">توكيلو</OPTION>
+    <OPTION ng-selected="nationality.value == 'تونغا'"  value="تونغا">تونغا</OPTION>
+    <OPTION ng-selected="nationality.value == 'ترينيداد وتوباغو'"  value="ترينيداد وتوباغو">ترينيداد وتوباغو</OPTION>
+    <OPTION ng-selected="nationality.value == 'تركمانستان'"  value="تركمانستان">تركمانستان</OPTION>
+    <OPTION ng-selected="nationality.value == 'جزر تركس وكايكوس'"  value="جزر تركس وكايكوس">جزر تركس وكايكوس</OPTION>
+    <OPTION ng-selected="nationality.value == 'توفالو'"  value="توفالو">توفالو</OPTION>
+    <OPTION ng-selected="nationality.value == 'أوغندا'"  value="أوغندا">أوغندا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أوكرانيا'"  value="أوكرانيا">أوكرانيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'أوروغواي'"  value="أوروغواي">أوروغواي</OPTION>
+    <OPTION ng-selected="nationality.value == 'أوزباكستان'"  value="أوزباكستان">أوزباكستان</OPTION>
+    <OPTION ng-selected="nationality.value == 'فانواتو'"  value="فانواتو">فانواتو</OPTION>
+    <OPTION ng-selected="nationality.value == 'مدينة الفاتيكان'"  value="مدينة الفاتيكان">مدينة الفاتيكان</OPTION>
+    <OPTION ng-selected="nationality.value == 'فنزويلا'"  value="فنزويلا">فنزويلا</OPTION>
+    <OPTION ng-selected="nationality.value == 'فيتنام'"  value="فيتنام">فيتنام</OPTION>
+    <OPTION ng-selected="nationality.value == 'والس وفوتونا'"  value="والس وفوتونا">والس وفوتونا</OPTION>
+    <OPTION ng-selected="nationality.value == 'الصحراء الغربية'"  value="الصحراء الغربية">الصحراء الغربية</OPTION>
+    <OPTION ng-selected="nationality.value == 'زامبيا'"  value="زامبيا">زامبيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'زيمبابوي'"  value="زيمبابوي">زيمبابوي</OPTION>
+    <OPTION ng-selected="nationality.value == 'صربيا'"  value="صربيا">صربيا</OPTION>
+    <OPTION ng-selected="nationality.value == 'الجبل الأسود'"  value="الجبل الأسود">الجبل الأسود</OPTION>
+</select>
+
+
+ <input  ng-if="nationality_type.value == '3' && unid.id == 'unid'"  type="text" ng-blur="validate(unid)" class="form-control" ng-model="unid.value" placeholder="الرقم الموحد">
+
+
+ <input onclick="document.activeElement.blur();" ng-if="nationality_type.value == '3' && visa_expiry_date.id == 'visa_expiry_date'" vxdate type="text" ng-blur="validate(visa_expiry_date)" class="form-control" ng-model="visa_expiry_date.value" placeholder="تاريخ انتهاء الإقامة">
+
+
+    <div ng-if="config.id == 'visaCopy' && nationality_type.value == '3'" class="item-content" ng-repeat="config in formConfig" ng-include="config.template"></div>
+                <p ng-if="config.errorMsg" class="help-block">{{configerrorMsg}}</p>
+                <p ng-if="!config.errorMsg && config.tooltip != ''">{{config.tooltip}}</p>
+
+
+
+
+
+        <br>
+        <select  ng-if="current_emirate.id == 'current_emirate'" style="    text-align: right;" ng-model="current_emirate.value" ng-init="current_emirate.value = current_emirate.value"  > 
+                    <option value=""   ng-selected="current_emirate.value == ''"  >{{ _('code39') }} </option>
+                    <option  value="1" ng-selected="current_emirate.value == '1'"  >{{ _('code40') }} </option>
+                    <option  value="2" ng-selected="current_emirate.value == '2'" >{{ _('code41') }}  </option>
+                    <option  value="3" ng-selected="current_emirate.value == '3'"  >{{ _('code42') }}   </option>
+                    <option  value="4" ng-selected="current_emirate.value == '4'"  >{{ _('code43') }}  </option>
+                    <option  value="5" ng-selected="current_emirate.value == '5'"  >{{ _('code44') }}   </option>
+                    <option  value="6" ng-selected="current_emirate.value == '6'"  >{{ _('code45') }} </option>
+                    <option  value="7" ng-selected="current_emirate.value == '7'"  >{{ _('code46') }}  </option>
+
+                </select>
+
+
+               
+
+                 <input ng-if="full_address.id == 'full_address'" type="text" ng-blur="validate(full_address)" class="form-control" ng-model="full_address.value" placeholder="{{ _('code38') }}">
+
+
+              
+
+      
+            </li>  
+
+            <li class="item-content" ng-if="nextVal == 4"  >
+                <h5  style="font-weight: 700"> {{ _('code32') }} </h5><br>
+
+                <input ng-if="emirates_id_number.id == 'emirates_id_number'" type="text" ng-blur="validate(emirates_id_number)" class="form-control" ng-model="emirates_id_number.value" placeholder="{{ _('code33') }}">
+
+                 <input onclick="document.activeElement.blur();" ng-if=" eid_expiry_date.id == 'eid_expiry_date'" idxdate type="text" ng-blur="validate(eid_expiry_date)" class="form-control" ng-model="eid_expiry_date.value" placeholder="تاريخ انتهاء الهوية">
+
+
+
+
+            </li>
+
+
+            <li class="item-content" ng-if="nextVal == 4"  >
+
+                <div ng-if="config.id == 'emiratesIDs'" class="item-content" ng-repeat="config in formConfig" ng-include="config.template"></div>
+                <p ng-if="config.errorMsg" class="help-block">{{configerrorMsg}}</p>
+                <p ng-if="!config.errorMsg && config.tooltip != ''">{{config.tooltip}}</p>
+            </li>
+
+
+            <li class="item-content" ng-if="nextVal == 5"  >
+                <h5  style="font-weight: 700"> {{ _('code34') }} </h5><br>
+
+                <input ng-if="passport_number.id == 'passport_number'" ng-if="nextVal == 3" type="text" ng-blur="validate(passport_number)" class="form-control" ng-model="passport_number.value" placeholder="{{ _('code35') }}">
+
+                <input onclick="document.activeElement.blur();" ng-if="passport_ex_date.id == 'passport_ex_date'" pasexdate ng-if="nextVal == 3" type="text" ng-blur="validate(passport_ex_date)" class="form-control" ng-model="passport_ex_date.value" placeholder="{{ _('code36') }} ">
+
+
+
+            </li>
+
+            <li class="item-content" ng-if="nextVal == 5"  >
+                <input pasexdate ng-if="formConfig[9].id == 'passport_ex_date'" type="text" ng-blur="validate(formConfig[9])" class="form-control" ng-model="formConfig[9].value" placeholder="{{ _('code36') }}">
+            </li>   
+            <li class="item-content" ng-if="nextVal == 5"  >
+                <div ng-if="config.id == 'passports'" class="item-content" ng-repeat="config in formConfig" ng-include="config.template"></div>
+                <p ng-if="config.errorMsg" class="help-block">{{configerrorMsg}}</p>
+                <p ng-if="!config.errorMsg && config.tooltip != ''">{{config.tooltip}}</p>
+            </li>
+
+
+
+
+
+
+
+
+
+
+            <li class="item-content" ng-if="nextVal == 6"  >
+                <h5  style="font-weight: 700"> {{ _('code61') }} </h5><br>
+
+
+   
+
+                <textarea ng-if="place_of_work.id == 'place_of_work'"  type="text" ng-blur="validate(place_of_work)" class="form-control" ng-model="place_of_work.value" placeholder=" {{ _('code68') }} ">  </textarea>
+
+                <input ng-if="home_phone.id == 'home_phone'"  type="text" ng-blur="validate(home_phone)" class="form-control" ng-model="home_phone.value" placeholder=" {{ _('code69') }} ">
+
+                <input ng-if="work_phone.id == 'work_phone'"  type="text" ng-blur="validate(work_phone)" class="form-control" ng-model="work_phone.value" placeholder="{{ _('code70') }} ">
+
+                <input ng-if="mobile_phone.id == 'mobile_phone'"  type="text" ng-blur="validate(mobile_phone)" class="form-control" ng-model="mobile_phone.value" placeholder=" {{ _('code71') }} ">
+
+                <input ng-if="fax.id == 'fax'"  type="text" ng-blur="validate(fax)" class="form-control" ng-model="fax.value" placeholder=" {{ _('code72') }} ">
+
+                <input ng-if="pobbox.id == 'pobbox'"  type="text" ng-blur="validate(pobbox)" class="form-control" ng-model="pobbox.value" placeholder="{{ _('code73') }} ">
+
+
+
+            </li>
+
+
+            <!-- 
+                <li class="item-content" ng-if="nextVal == 4"  {{formConfig[0].css}}" ng-repeat="config in formConfig">
+                        <div ng-if="formConfig[0].type=='tardeLicenceUploadFiles'  && nextVal == 4 " ng-include="formConfig[0].template"></div>
+                        <p ng-if="formConfig[0].errorMsg && nextVal == 4" class="help-block">{{formConfig[0].errorMsg}}</p>
+                        <p ng-if="!formConfig[0].errorMsg && formConfig[0].tooltip != '' && nextVal == 4">{{formConfig[0].tooltip}}</p>
+                </li> -->
+
+        </ul>
+
+
+    <input ng-if="$root.selectedID > 0 && nextVal == 6 " class="btn btn-lg submitbtnReg" n ng-click="create()" style="color: #fff" type="button" id="submit" value="{{ _('code74') }}">
+
+        <input ng-if="$root.selectedID == 0 && nextVal == 6" class="btn btn-lg submitbtnReg" ng-click="create()" style="color: #fff" type="button" id="submit" value="{{ _('code75') }}">
+
+
+
+        <input class="btn btn-lg submitbtn" ng-if="nextVal >= 1 && nextVal < 6" ng-click="next()" type="button" id="submit" value="{{ _('code76') }}">
+
+
+        <input class="btn btn-lg submitbtnPrev" ng-if="nextVal > 1" ng-click="prev()" type="button" id="submit" value="{{ _('code77') }} ">
+
+    </div>
+
+</div>
+
+
+
+
+
+</form>
+
+
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+

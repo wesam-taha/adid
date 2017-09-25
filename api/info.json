@@ -1,0 +1,39 @@
+{
+         "record": {
+        "group_id": "1",
+        "first_name": "Shane Michael",
+        "second_name": "shane01101",
+        "third_name": "support@mediasoftpro.com",
+        "date_of_birth": "1987-09-13",
+        "email": "43534534534",
+        "password": "123456",
+        "emirates_id_number": "546564564654",
+        "passport_number": "564654",
+        "passport_ex_date": "2018-09-13",
+        "nationality": "Palestine",
+        "full_address": "Dubai Mag218",
+        "marital_status": "1",
+        "blood_type": "1",
+        "driving_licence": "1",
+        "job": "1",
+        "current_emirate": "1",
+        "gender": "1",
+        "place_of_work": "Dubai",
+        "volunteering_type": "1",
+        "home_phone": "0555076146",
+        "work_phone": "0555076146",
+        "mobile_phone": "0555076146",
+        "fax": "0555076146",
+        "pobbox": "0555076146",
+        "home_phone": "0555076146",
+        "passports": [
+                { "filename": "308906564_p1bfi955nopteciptd71a2gh3.jpg"} 
+                 ],
+        "emiratesIDs": [
+            { "filename": "229173228_p1bip1dad0do31bcn1rqodcu1p8qi.jpg"}, 
+            { "filename" : "388771783_p1bip1dacvnfe1mon30d1q2tseph.jpg" } 
+        ]
+    }
+}
+
+

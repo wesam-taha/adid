@@ -1,0 +1,43 @@
+<!-- list of uploaded files -->
+
+<div  ng-if="Info.cv && !Info.cvCopy">
+    <div  class="uploadedContainer">
+<a  href="{{config.settings.filepath}}{{file.filename}}" target="_blank">
+            <a href="{{config.settings.filepath}}{{Info.cv}}"> تم تحميل السيرة الذاتية </a>
+        </a>
+    </div>
+</div>
+
+
+<div  ng-repeat="file in Info.cvCopy track by $index">
+    <div  class="uploadedContainer">
+        <a  href="{{config.settings.filepath}}{{file.filename}}" target="_blank">
+            تم تحميل الملف
+        </a>
+        <a ng-click="remove(file.filename, $index, 'cvCopy')" title="remove file" href>
+            <img src="images/bigminus.png" width="24" height="24" >
+        </a>
+    </div>
+</div>
+<cvcopyfileuploader 
+    handlerpath="{{config.settings.handlerpath}}"
+    pickfilecaption="{{config.settings.pickfilecaption}}"
+    max_file_size="{{config.settings.max_file_size}}"
+    chunksize="{{config.settings.chunksize}}"
+    headers="{{config.settings.headers}}"
+    extensions="pdf"
+    extensiontitle="{{config.settings.extensiontitle}}"
+    filename="{{config.value}}"
+    filepath="{{config.settings.filepath}}"
+    removehandler="{{config.settings.removehandler}}"
+    maxallowedfiles="{{config.maxfiles}}"
+    uploadfilecaption={{config.settings.uploadfilecaption}}
+    submit-data="getCvCopyUploadedData(data)"
+    >
+</cvcopyfileuploader>
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+<div ng-init="root.isHomePage = false" class="views" >
+    <div class="view view-main" ng-init="getActivities()" data-page="cards">
+        <div  ng-init="getAchievements()" class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header  " ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+
+                <div  class="page-content " style="width: 90%;margin: 0 auto;height: 77%;background-image: none !important;background-image: url(images/regBG.png) !important;background-color: #0083b8;margin-top: 33px;border-radius: 11px;">
+                    <div id="scrollable" class="list-block" style=" margin-top: 10px;     padding: 0px;">
+
+                      <table style="width: 85%; margin: 20px; ">
+                          <tr  ng-repeat="n in achievements"  style="border-bottom: 3px rgba(0,0,0,0.15) solid">
+                             <td style="padding: 5px;">
+                              <img style="width: 100px; " src="http://aladheid.ae/images/{{n.activity_image}}">
+                          </td>
+                          <td style="text-align: right; padding-top: 10px; padding-bottom: 10px; ">
+                            <a href="#/achievements/{{ n.activity_id }}">
+                            <span style="color: #336699;     margin-right: -7px; font-size: 14px; font-weight: 700; " ng-if="$root.currentLang == 'ar' " > {{ n.activity_name_ar }} </span>
+
+
+                            <span style="color: #336699;     margin-right: -7px; float: left; text-align: left; font-size: 14px; font-weight: 700; " ng-if="$root.currentLang == 'en' " > {{ n.activity_name_en }} </span>
+
+                            <br>
+                            <span  style="color: #dd042b; font-size: 12px; float: right; text-align: left; font-weight: 700; " ng-if="!n.stars && $root.currentLang == 'en' " >
+                             {{_('code120')}} 
+                         </span>
+                         <span  style="color: #dd042b; font-size: 12px;  text-align: right; font-weight: 700; " ng-if="!n.stars && $root.currentLang == 'ar' " >
+                             {{_('code120')}} 
+                         </span>
+                         <img ng-if="n.stars" style="width: 100px;" src="images/{{n.stars}}-stars.png">
+
+                         <br>
+                         <span ng-if="$root.currentLang == 'ar' " style="color: #666; font-size: 11px; font-weight: 700;  float: right; direction: rtl;">
+                             {{ n.activity_hours }}  {{_('code21')}}
+                             <span ng-if="n.stars"> {{_('code19')}}  <Br> {{ n.evalutaion }}% {{_('code121')}}</span>
+                             <span ng-if="!n.stars">  {{_('code20')}}    </span>
+                         </span>
+                         <span ng-if="$root.currentLang == 'en' " style="color: #665; font-size: 11px;  text-align: left;  float: left; font-weight: 700;  ">
+                             {{ n.activity_hours }}  {{_('code21')}}
+                             <span ng-if="n.stars"> {{_('code19')}} <Br>  {{ n.evalutaion }}% {{_('code121')}}</span>
+                             <span ng-if="!n.stars">  {{_('code20')}} </span>
+                         </span>
+                         <br>
+                     </a>
+                     </td>
+
+                 </tr>
+
+             </table>
+
+
+
+
+         </div>
+     </div>
+
+
+
+ </div>
+
+</div>
+
+
+<div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+
+</div>

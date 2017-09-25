@@ -1,0 +1,50 @@
+<div id="plupload_container">
+    <div id="modalmsg">
+
+    </div>
+    <div ng-if="showProgress">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <div class="alert {{messagecss}} alert-dismissible" role="alert" ng-if="message != ''" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{{message}}</strong>
+    </div>
+    <div  >
+        <br>
+        <div ng-if="!fileUploaded" ng-repeat="item in cvCopySelectedFiles"  >
+            <div ng-if="item.percent == 100">
+                Selected file uploaded...
+            </div>
+            <div ng-if="item.percent < 100">
+                File: {{item.name}}
+                <div class="progress">
+                    <div class="progress-bar {{item.css}} " role="progressbar" aria-valuenow="{{item.percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.percent}}%">
+                        <span class="sr-only">{{item.percent}}% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  style=" width: 100%; ">
+        <a  id="pickfiles" style="  width: 98%;  font-size: 16px; margin: 0 auto; " title="Upload Files" href class="btn btn-info btn-sm">
+
+ <span ng-if="$root.currentLang=='ar'"> إلمس لتحميل  السيرة الذاتية  </span>
+        <span ng-if="$root.currentLang=='en'"> Tap to upload your CV </span>
+
+  </a>        
+
+
+
+        <a ng-if="cvCopySelectedFiles.length > 0 && !startUploading  && $root.currentLang=='ar'" id="uploadfiles" class="btn btn-danger btn-sm" href="#"> تحميل الصور المختارة  </a>
+
+<a ng-if="cvCopySelectedFiles.length > 0 && !startUploading  && $root.currentLang=='en'" id="uploadfiles" class="btn btn-danger btn-sm" href="#"> Upload Selected Photos  </a>
+
+    </div>
+    <br><br>
+</div>
+

@@ -1,0 +1,114 @@
+<div ng-init="root.isHomePage = false" class="views" >
+    <div class="view view-main" ng-init="getActivities()" data-page="cards">
+        <div  ng-init="getAccountInfo()" class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header  " ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+
+                <div  class="page-content ">
+                    <div class="list-block accordion-list">
+                        <ul>
+
+                            <li ng-repeat='t in team' class="accordion-item"><a class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div  ng-if="$root.currentLang=='ar'" class="item-title" style="text-align: center;">
+                                        {{ t.full_name_ar }}</div>
+                                          <div  ng-if="$root.currentLang=='en'" class="item-title" style="text-align: center;">
+                                        {{ t.full_name_en }}</div>
+                                    </div></a>
+                                <div class="accordion-item-content">
+                                    <div class="list-block">
+                                        <ul>
+
+                                            <li>
+
+                <select  ng-if="$root.currentLang=='ar'"  id="admin_approval_{{ t.id }}"  style="text-align:center" ng-model="t.admin_approval" ng-init="t.admin_approval = t.admin_approval"  > 
+                    <option value=""  ng-selected="t.admin_approval == '0'" > لم يحضر </option>
+                    <option  value="1" ng-selected="t.admin_approval == '1'"  > تأكيد الحضور  </option>
+                </select>
+
+                <select  ng-if="$root.currentLang=='en'"  id="admin_approval_{{ t.id }}"  style="text-align:center" ng-model="t.admin_approval" ng-init="t.admin_approval = t.admin_approval"  > 
+                    <option value=""  ng-selected="t.admin_approval == '0'" > Absent </option>
+                    <option  value="1" ng-selected="t.admin_approval == '1'"  > Attended </option>
+                </select>                
+
+                                            <br>
+                                             
+
+                                            <div  ng-repeat="r in rating" >
+
+                                              <span ng-if="$root.currentLang=='ar'"> {{ r.name }} </span> 
+                                              <span ng-if="$root.currentLang=='en'"> {{ r.name_en }} </span>  
+                                              <br>
+
+                                              <div ng-init="selectedStars = getSelectedStars(r.id, t.user_id)">
+                                                <span ng-if="!selectedStars" >0</span>
+                                                {{ selectedStars }} / 5 </div>
+
+
+
+                                              <img  ng-click="setSelectedStars(r.id,t.user_id,$index)"  ng-repeat="i in getSelectedStars(r.id,t.user_id) | range"  style="width: 30px;" src="images/starOn.png">
+                                            
+                                               <img  ng-click="setSelectedStars(r.id,t.user_id,$index)"   ng-repeat="i in 5- getSelectedStars(r.id,t.user_id) | range"  style="width: 30px;" src="images/starOff.png">
+                                                                                                       
+
+                                              <hr>
+
+
+                                            </div>
+
+
+
+
+                                           <textarea  id="admin_comment{{ t.id }}" rows="5" cols="10" placeholder="ملاحظة المشرف" > {{ t.admin_comment }}</textarea>
+                                           <br>
+                                           <a ng-click="submitManageForm(t.id)" class="button button-fill button-raised">ارسال </a>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+        <div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+
+    </div>
+
+    <style type="text/css">
+
+        .list-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            position: relative;
+            width: 90%;
+            background-color: #f2f2f2;
+            text-align: center; 
+        }
+        .list-block .accordion-item .content-block, .list-block .accordion-item .list-block, .list-block li {
+            background-color: #dedddd;
+        }
+        .list-block .item-content, .list-block .item-inner { display: block; }
+        .list-block .item-link .item-inner, .list-block .list-button .item-inner { 
+            background-image: url('images/arrow.png') !important; background-size: 10%; 
+        }
+
+
+.list-block:not(.media-list) .accordion-item-expanded:not(.media-item) .accordion-item-toggle .item-inner, .list-block:not(.media-list) .accordion-item-expanded:not(.media-item) > .item-link .item-inner, .list-block.media-list .accordion-item-expanded .accordion-item-toggle .item-title-row, .list-block.media-list .accordion-item-expanded > .item-link .item-title-row, .list-block .accordion-item-expanded.media-item .accordion-item-toggle .item-title-row, .list-block .accordion-item-expanded.media-item > .item-link .item-title-row { 
+ background-image: url('images/arrow2.png') !important; background-size: 10%;
+ }        
+    </style>

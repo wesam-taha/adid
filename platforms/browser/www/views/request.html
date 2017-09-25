@@ -1,0 +1,159 @@
+<div  ng-include="'views/templates/appHeader.html'"></div>
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+<div class="alert {{messagecss}} " role="alert" ng-if="message != ''">
+    <button type="button" class="close" ng-click="clear()" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></button>
+    <p ng-if="validationLog.length > 0" ng-repeat="val in validationLog track by $index">
+        {{val.message}}
+    </p>
+</div>
+<div ng-if="showProcessing">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+
+<!--<h4 class="heading-primary text-uppercase mb-md">{{Form.header}} {{ nextVal }}</h4>
+<p ng-if="Form.info != ''"> {{Form.info}} </p> -->
+
+<div ng-init="getGlobalSettings()" class="page-content" style="    margin-top: -20px;" ng-if="!showProcessing" >
+    <div class="list-block" style="background-image: url(images/regBG.png); padding: 20px; background-size: cover; border-radius: 30px; margin: 20px; margin-top: 20px; text-align: center;     padding-bottom: 50px;
+         margin-bottom: 60px; border: 0px #ddd solid" class="ng-pristine ng-valid ng-scope">
+
+        <ul >
+            <li class="item-content" ng-if="nextVal == 1" class="form-group {{formConfig[0].css}}" >
+                <div class="item-input" style="text-align:center"> 
+                    <h5  style="font-weight: 700; margin-bottom: 15px; "> {{ _('code87') }}</h5>
+
+
+
+
+                    <input ng-if="event_name.id == 'event_name'" ng-if="nextVal == 1" type="text" ng-blur="validate(event_name)" class="form-control" ng-model="event_name.value" placeholder="{{ _('code88') }} ">
+
+       
+                <select  ng-if="event_emirate.id == 'event_emirate'" style="    text-align: right;" ng-model="event_emirate.value" ng-init="event_emirate.value = event_emirate.value"  > 
+           <option value=""   ng-selected="current_emirate.value == ''"  >{{ _('code39') }} </option>
+                    <option  value="1" ng-selected="current_emirate.value == '1'"  >{{ _('code40') }} </option>
+                    <option  value="2" ng-selected="current_emirate.value == '2'" >{{ _('code41') }}  </option>
+                    <option  value="3" ng-selected="current_emirate.value == '3'"  >{{ _('code42') }}   </option>
+                    <option  value="4" ng-selected="current_emirate.value == '4'"  >{{ _('code43') }}  </option>
+                    <option  value="5" ng-selected="current_emirate.value == '5'"  >{{ _('code44') }}   </option>
+                    <option  value="6" ng-selected="current_emirate.value == '6'"  >{{ _('code45') }} </option>
+                    <option  value="7" ng-selected="current_emirate.value == '7'"  >{{ _('code46') }}  </option>
+
+                </select>
+            
+             <input ng-if="event_location.id == 'event_location'" ng-if="nextVal == 1" type="text" ng-blur="validate(event_location)" class="form-control" ng-model="event_location.value" placeholder="{{ _('code89') }}">
+
+            <input ng-if="activity_start_date.id == 'activity_start_date'"  ng-if="nextVal == 1" startd 
+                           onclick="document.activeElement.blur();"  type="text" ng-blur="validate(activity_start_date)" class="dob form-control" ng-model="activity_start_date.value" placeholder="{{ _('code90') }}">
+
+          <input ng-if="activity_end_date.id == 'activity_end_date'"  ng-if="nextVal == 1" endd 
+                           onclick="document.activeElement.blur();"  type="text" ng-blur="validate(activity_end_date)" class="dob form-control" ng-model="activity_end_date.value" placeholder="{{ _('code91') }}">
+
+       <input ng-if="activity_time.id == 'activity_time'" ng-if="nextVal == 1" type="text" ng-blur="validate(activity_time)" class="form-control" ng-model="activity_time.value" placeholder="{{ _('code92') }}">
+
+
+            
+
+                </div>
+            </li>
+
+          
+
+
+            <li class="item-content" ng-if="nextVal == 2"  >
+                <h5  style="font-weight: 700">{{ _('code93') }}   </h5><br>
+
+
+                <select  ng-if="activity_gender_target.id == 'activity_gender_target'" style="text-align:center" ng-model="activity_gender_target.value" ng-init="activity_gender_target.value = activity_gender_target.value"  > 
+                    <option value=""  ng-selected="activity_gender_target.value =4 ''" >{{ _('code94') }}  </option>
+                    <option  value="1" ng-selected="activity_gender_target.value == '1'"  >{{ _('code95') }}   </option>
+                    <option  value="2" ng-selected="activity_gender_target.value == '2'"  >{{ _('code96') }}  </option>
+                </select>
+
+  <input ng-if="no_of_persons_needed.id == 'no_of_persons_needed'" type="text" ng-blur="validate(no_of_persons_needed)" class="form-control" ng-model="no_of_persons_needed.value" placeholder="{{ _('code97') }} ">
+
+  <input ng-if="no_of_hours.id == 'no_of_hours'"  type="text" ng-blur="validate(no_of_hours)" class="form-control" ng-model="no_of_hours.value" placeholder="{{ _('code98') }}">
+
+
+
+
+                <textarea ng-if="activity_description.id == 'activity_description'"  type="text" ng-blur="validate(activity_description)" style="height: 150px;" class="form-control" ng-model="activity_description.value" placeholder=" {{ _('code99') }}  ">  </textarea>
+
+
+
+
+            </li>
+
+    
+
+
+
+
+            <li class="item-content" ng-if="nextVal == 3"  >
+                <h5  style="font-weight: 700">{{ _('code100') }} </h5><br>
+
+
+
+                <input ng-if="mobile_phone.id == 'mobile_phone'"  type="text" ng-blur="validate(mobile_phone)" class="form-control" ng-model="mobile_phone.value" placeholder=" {{ _('code71') }} ">
+
+                <input ng-if="fax.id == 'fax'"  type="text" ng-blur="validate(fax)" class="form-control" ng-model="fax.value" placeholder=" {{ _('code72') }} ">
+
+                <input ng-if="pobox.id == 'pobox'"  type="text" ng-blur="validate(pobox)" class="form-control" ng-model="pobox.value" placeholder=" {{ _('code73') }} ">
+
+
+
+            </li>
+
+
+        </ul>
+
+
+
+        <input ng-if="nextVal == 3" class="btn btn-lg submitbtnReg" ng-click="create()" style="color: #fff" type="button" id="submit" value="{{ _('code101') }}">
+
+
+
+        <input class="btn btn-lg submitbtn" ng-if="nextVal >= 1 && nextVal < 3" ng-click="next()" type="button" id="submit" value="{{ _('code76') }}">
+
+
+        <input class="btn btn-lg submitbtnPrev" ng-if="nextVal > 1" ng-click="prev()" type="button" id="submit" value="{{ _('code77') }} ">
+
+
+    </div>
+
+</div>
+
+
+
+
+
+</form>
+
+
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+

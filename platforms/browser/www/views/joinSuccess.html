@@ -1,0 +1,112 @@
+<div class="views" ng-init="root.isHomePage = false">
+    <div class="view view-main" data-page="cards">
+        <div class="pages navbar-fixed">
+            <div data-page="index" class="page  page-on-left">
+                <header class="site-header" ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+
+                <div ng-init="joinActivity()" class="page-content " style="background-image: url('images/loginBG.png') !important; overflow:hidden;">
+                    <div id="scrollable" class="list-block" style="  margin-top: 10px;">
+
+                        <div  class="headerImg  card-header color-white no-border " style="padding: 0px !important">
+
+                            <table style="width: 100%; background-color: #f3f3f3; direction: rtl; font-weight: 700; width: 80%; margin: 0 auto; border-radius: 20px; margin-top: 30px; height: 200px; ">
+                                <tr><td style="text-align: center; ; color: #000">
+                                        <br><br>
+                                  
+
+
+                                    </td></tr>
+
+
+
+
+
+                                <tr><td style="text-align: center;text-align: center ">
+
+<div ng-if="joinDetails.security_approval == '0' " style="width: 90%; margin: 0 auto">
+
+
+  <h4  style="text-align: center; color: #000; line-height: 25px; font-weight: 700; margin-top: 8px;margin-bottom: 30px;font-size: 16px;">
+                                    <img style="height: 62px;position: relative;top: -12px;margin-left: 20px; " src="images/notification-flat.png"><br>
+                                     {{ _('code124') }}  </h4>
+
+ 
+</div>
+
+<h4 ng-if="joinDetails.security_approval == '1'" style="text-align: center; ; color: #000">
+    {{ _('code114') }} 
+</h4>
+
+<div ng-if="joinDetails.security_approval == '1'" style="text-align: center;
+    color: #ffffff;
+    font-size: 15px;
+    background-color: #47c0e4;
+    width: 82%;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 6px;
+    margin-top: 20px;">
+                                      {{ _('code115') }} 
+ <br>
+                                        {{ joinDetails.timetostartatring }}
+
+                                       
+                  
+
+
+                                        <br>
+</div>
+
+
+                                    </td></tr>
+
+
+
+    <tr ng-if="joinDetails.security_approval == '1'" ><td> 
+     
+     <br> <br><br>
+     <div class="joinNow" style="width: 100%;
+    text-align: center;
+    /* background-color: #ddd; */
+    margin-top: -30px !important;
+    margin-bottom: 20px !important;
+    height: 55px;  font-size: 14px;
+    padding-top: 15px; color: #ff5722;
+    position: relative; z-index: 999999;
+}" ng-click="openMapWindow(joinDetails.activity_location_map)"> 
+
+{{ _('code104') }}
+
+
+ </div>
+
+          </td></tr>
+
+   <tr ng-if="joinDetails.security_approval == '1'" ><td style="height: 48px; text-align: center; width: 50%; color: #f32159 " > 
+                                     <div class="joinNow" > <a style="font-size: 14px; position: relative;top: -2px; " href="#/view/{{ joinDetails.activity_id }}"  >
+                                             
+{{ _('code103') }}
+
+                                                     </a></div>
+                                         </td></tr>
+            <tr> <td> <br><br>  </td></tr>
+                            </table>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+    </div>

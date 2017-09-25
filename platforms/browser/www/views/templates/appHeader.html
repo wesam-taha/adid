@@ -1,0 +1,43 @@
+<div id="myHead" class="navbar">
+    <div class="navbar-inner"></div>
+
+    <div class="right">
+        <a data-panel="left" class="open-panel link icon-only" style="padding: 0px; padding-left: 16px;">
+            <img src="images/headerBar.png" style="width: 65%; margin-left: -20px; margin-top: -5px;  " >
+        </a>
+
+        <a ng-if="!root.isHomePage"  href="javascript:history.go(-1)" style="margin-left: -20px; margin-top: -5px; "  class="back link icon-only">
+            <i class="fa fa-arrow-left" ></i></a>
+    </div>
+
+
+        <img src="images/smallLogo.png" style="width: 75px; position: absolute; top: 6px; left: 120px;" >
+
+
+    <div ng-class="{arText : $root.currentLang == 'ar' }" style="  float: right;  width: 61%; position: relative; font-size: 16px; text-align: center !important ;margin-top: -36px; left: 55px; z-index: 999999999;     padding-right: 100px; "> 
+
+
+
+
+        <div style="position: absolute; top: -25px; right: 80px;">
+
+
+            <a href="#/home" ng-click="change2Home()" style="  position: relative; top: 10px;">
+                <img style="max-width: 33px;margin-top: 2px;margin-right: 8px;" src="images/if_8_330406.png">
+            </a>
+
+
+            <a  href="#/notifications" style="  float: right; position: relative; top: 10px;  ">
+                <img style="max-width: 40px;margin-top: 0px;margin-left: 5px; margin-right: -10px; " src="images/if_email_272432.png"></a>
+
+
+        </div>
+
+        <div ng-if=" $root.currentLang == 'ar'" ng-click="change2English()" class="maint ng-binding" style="/* width: 182px; */overflow: hidden;height: 20px;margin: 0 auto;font-size: 18px;margin-left: -37px;margin-top: -2px; "> EN  </div>
+        <div ng-if=" $root.currentLang == 'en'"  ng-click="change2Arabic()" class="maint ng-binding" style="/* width: 182px; */overflow: hidden;height: 33px;margin: 0 auto;font-weight: 700;margin-top: -14px;font-size: 24px;margin-left: -37px; "> ع </div>
+
+
+        </div>
+
+
+</div>

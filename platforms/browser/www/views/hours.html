@@ -1,0 +1,72 @@
+<div class="views" ng-init="root.isHomePage = false">
+<div class="view view-main" data-page="cards">
+<div class="pages navbar-fixed">
+<div ng-init="getMyHours()" data-page="index" class="page  page-on-left">
+<header class="site-header" ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+<div ng-if="!loadingHoursDone" class="spinner">
+  <div class="double-bounce1"></div>
+  <div class="double-bounce2"></div>
+</div>
+
+<div ng-if="loadingHoursDone"  class="page-content " style="background-image: url('images/loginBG.png') !important; overflow:hidden;">
+  <div id="scrollable" class="list-block" style="  margin-top: 10px;">
+
+    <div  class="headerImg  card-header color-white no-border " style="padding: 0px !important">
+
+
+
+      <table style="width: 100%; background-color: #fff; width: 90%; margin: 0 auto; border-radius: 20px; margin-top: 10px; height: 200px;  ">
+        <tr><td style="text-align: center;">
+         <br>
+
+          <img style="border-radius: 50%;-webkit-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.75);box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);width: 140px; height: 140px;" src="http://aladheid.ae/images/{{userInfo.personal_photo}}">
+          <br>
+          <span style="color: #336699; font-size: 22px; font-weight: 700; " ng-if="$root.currentLang == 'ar' " > {{ userInfo.full_name_ar }} </span>
+          <span style="color: #336699; font-size: 22px; font-weight: 700; " ng-if="$root.currentLang == 'en' " > {{ userInfo.full_name_en }} </span>
+          <br>
+          <span style="color: green; font-size: 18px; font-weight: 700; " ng-if="$root.currentLang == 'ar' " > {{ slogan.title }} </span>
+          <span style="color: green; font-size: 18px; font-weight: 700; " ng-if="$root.currentLang == 'en' " > {{ slogan.title_en }} </span>
+          <br> 
+          <img style="width: 200px;" src="images/{{userInfo.stars}}-stars.png">
+        </td></tr>
+        <tr>
+          <td style="text-align: center;  font-weight: 700;  direction: rtl; color: #000 ">
+      
+         <!--  {{_('code18')}} -->
+
+         <span style="color: green; font-size: 35px; font-size: verdana"> {{ approvedHours }} </span> {{_('code21')}} {{_('code19')}} 
+          <br>
+         <span style="color: green; font-size: 35px; font-size: verdana"> {{ onholdHours }} </span>  {{_('code21')}}  {{_('code20')}}
+          <br>
+         <span style="color: orange; font-size: 35px; font-size: verdana"> {{ userInfo.overall_evaluation }}% </span>  {{_('code119')}} 
+          <br>
+          <br>
+          <a ng-click="exportReport()" class="btn btn-lg submitbtn" style="border-radius: 5px;  color: #336699;    font-weight: 700;    background-color: #dcdcdc; min-width: 60% !important; padding-right: 20px; padding-left: 20px; "  id="submit" > {{_('code22')}} </a>
+
+          <br><br>
+          <br>
+
+
+
+        </td></tr>
+
+      </table>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+</div>
+
+</div>
+<div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+</div>

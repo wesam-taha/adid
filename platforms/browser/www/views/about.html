@@ -1,0 +1,67 @@
+<div class="views" ng-init="root.isHomePage = false">
+    <div class="view view-main" data-page="cards">
+        <div class="pages navbar-fixed">
+            <div  data-page="index" class="page  page-on-left">
+                <header class="site-header" ng-include="'views/templates/appHeader.html?i=123'"></header>
+
+
+<div ng-if="!globalDone" class="spinner">
+  <div class="double-bounce1"></div>
+  <div class="double-bounce2"></div>
+</div>
+
+
+         <div  ng-if="globalDone"  class="list-block" style="background-image: url(images/regBG.png) !important; padding: 10px; background-size: cover; border-radius: 30px; margin: 10px; margin-top: 28px; text-align: center;     padding-bottom: 0px;
+         margin-bottom: 0px; border: 0px #ddd solid">
+
+                    <div id="scrollable" class="list-block" style="  margin-top: 0px;">
+
+
+                        <h2 ng-if="$root.currentLang == 'ar' " style="text-align: right;  padding-right: 20px;"> {{ global.system_name_ar }}  </h2>   
+                        <h2 ng-if="$root.currentLang == 'en' " style="text-align: left;  padding-right: 20px;"> {{ global.system_name_en }}  </h2>   
+<br>
+                         <img src="images/add.png" style="height: 120px; margin-top: -10px;">
+
+                         <br>  <br><br>
+
+                        <div  class="headerImg  card-header color-white no-border " style="padding: 0px !important">
+
+                        <div ng-if="$root.currentLang == 'ar' " style=" overflow: scroll; color: #336699; max-height: 250px; margin-top: -20px;   text-align: right; direction: rtl; width: 95%;" ng-bind-html="global.about_us_ar" > </div>
+
+
+   <div ng-if="$root.currentLang == 'en' " style=" overflow: scroll; color: #336699; max-height: 250px; font-weight: 700; margin-top: -20px;   text-align: left; direction: rtl; width: 95%;" ng-bind-html="global.about_us_en" > </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div  class="toolbar " style="height: 55px;"   ng-include="'views/templates/appFooter.html?i=123'"></div>
+
+
+    </div>
+
+    <style type="text/css">
+
+        #map div {  color: #000 !important; text-align: center;	    font-family: 'Droid Arabic Kufi';
+        }
+        .button.button-big {
+            height: 32px;
+            line-height: 33px;
+            border-radius: 3px;
+            background-color: #47c0e4;
+            color: #fff;
+            font-family: 'Droid Arabic Kufi';
+            padding: 0px;
+            width: 116px;
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+
+
+    </style>

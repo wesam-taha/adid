@@ -127,6 +127,31 @@
     @-ms-viewport { user-zoom: fixed ; }           @viewport { user-zoom: fixed ; }
 </style>
 
+
+<script type="text/javascript">
+
+document.addEventListener('deviceready', function () {
+  // Enable to debug issues.
+  // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+  
+  var notificationOpenedCallback = function(jsonData) {
+    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  };
+
+  window.plugins.OneSignal
+    .startInit("90e51a60-f3d4-4b24-9172-c53a7669bbd7")
+    .handleNotificationOpened(notificationOpenedCallback)
+    .endInit();
+  
+  // Call syncHashedEmail anywhere in your app if you have the user's email.
+  // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
+  // window.plugins.OneSignal.syncHashedEmail(userEmail);
+}, false);
+
+</script>
+
+
+
 <!-- jQuery -->
 <!-- Angular JS -->
 <!-- jQuery -->
@@ -163,6 +188,7 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyD118sPO7c_WCgGckGHgJrfgGotjQv1JXA&sensor=false"></script>
 
 <script type="text/javascript">
+
 
 
 var logout = function () {

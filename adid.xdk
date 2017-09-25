@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-ad-project/sample.zip",
       "projectGuid": "2d975f90-4381-4b23-97c1-1f2fbc3376f6",
-      "lastModifiedDate": 1506337783398,
+      "lastModifiedDate": 1506357850981,
       "creationDate": 1506337471351
     },
     "sourceDirectory": "www",
@@ -99,7 +99,7 @@
     "buildConfigurations": {
       "Android": {
         "platform_": "android",
-        "runtime_": "Cordova 3.x",
+        "runtime_": "Crosswalk with Cordova 3.x",
         "name_": "Android",
         "preferences_": {
           "android-minSdkVersion": "19",
@@ -110,15 +110,16 @@
           "android-signed": true
         },
         "isActive_": true,
-        "certificateId_": "",
+        "certificateId_": "Gc790i3ryEy6smkK5rywxA2",
         "cordovaCLIVersion_": "6.2.0",
         "crosswalkVersion_": "23",
-        "appName_": "111",
-        "appID_": "xdk.intel.template",
+        "appName_": "العضيد",
+        "appID_": "com.adid.app",
         "appAccess_": {
           "mode": "whitelist",
           "network": [
-            "*"
+            "*",
+            "http://www.aladheid.ae/*"
           ],
           "intents": [
             "http://*/*",
@@ -129,7 +130,8 @@
             "geo:*",
             "market:*"
           ],
-          "navigation": []
+          "navigation": [],
+          "properties": {}
         },
         "icons_": [],
         "splashes_": [],
@@ -137,8 +139,8 @@
         "excludedLibraries_": "",
         "appVersion_": "0.0.1",
         "appVersionCode_": "1",
-        "appDescription_": "Intel XDK template",
-        "appAuthor_": "Intel XDK",
+        "appDescription_": "تطبيق العضيد",
+        "appAuthor_": "http://aladheid.ae",
         "signed_": true
       },
       "iOS": {

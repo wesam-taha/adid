@@ -6,6 +6,18 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {},
-    "dependent_plugins": {}
+    "installed_plugins": {
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.adid.app"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.adid.app"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [],
+    "plugin_metadata": {
+        "cordova-plugin-crosswalk-webview": "2.3.0",
+        "cordova-plugin-whitelist": "1.2.2"
+    }
 }
